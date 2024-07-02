@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="jakarta.faces.facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<!-- <ui:decorate template="/WEB-INF/layout/template.xhtml"> -->
+<!--  <ui:define name="head"> -->
+<!--  	<title>Person</title> -->
+<!--  </ui:define> -->
+<!-- </ui:decorate> -->
+<!-- <h:body> -->
+
+<ui:composition template="layout/template.xhtml">
+
+	<ui:define name="head">
+		<title>Pessoa</title>
+	</ui:define>
+
+	<ui:define name="title">
+		Pessoa
+	</ui:define>
+
+	<ui:define name="body">
+
+
+		<div class="panel panel-default">
+			<!--   <div class="panel-body">A Basic Panel</div> -->
+
+
+			<h:form id="personForm">
+
+				<p:messages id="messages" redisplay="false" showSummary="true"
+					showDetail="false" />
+
+
+				<!-- <div class="container text-left"> -->
+				<div class="box-body col-md-4">
+					<p:panel layout="grid" styleClass="box-primary ui-fluid ">
+
+						<!-- 					<h:outputText value="Nome: " /> -->
+						<div class="form-group">
+							<label for="nome">Nome: </label>
+							<p:inputText value="#{personBean.personDTO.name}" required="true"
+								requiredMessage="Nome obrigatório" maxlength="255" id="nome"
+								class="form-control" />
+						</div>
+
+
+						<div class="form-group">
+							<label for="cpf">CPF: </label>
+							<p:inputMask value="#{personBean.personDTO.cpf}" required="true"
+								requiredMessage="CPF obrigatório" mask="999.999.999-99" id="cpf"
+								class="form-control" />
+						</div>
+
+						<div class="form-group">
+							<label for="dataNascimento">Data de Nascimento: </label>
+							<p:calendar maxlength="10"
+								value="#{personBean.personDTO.dateBirth}" navigator="true"
+								mask="99/99/9999" required="true" id="dataNascimento"
+								requiredMessage="Data de Nascimento obrigatório"
+								pattern="dd/MM/yyyy" />
+						</div>
+
+						<div class="form-group">
+							<label for="fone">Telefone: </label>
+							<p:inputMask value="#{personBean.personDTO.phone}" id="fone"
+								mask="(99)9999-9999" class="form-control" />
+						</div>
+
+						<div class="form-group">
+							<label for="email">Email: </label>
+							<p:inputText value="#{personBean.personDTO.email}"
+								required="true" id="email" requiredMessage="Email obrigatório"
+								maxlength="255" class="form-control" />
+						</div>
+
+						<div class="box-footer row">
+							<div class="col-xs-5">
+								<p:commandButton value="Salvar" action="#{personBean.save()}"
+									icon="fa fa-check" styleClass="btn btn-primary" update="messages, personForm"/>
+							</div>
+							<div class="col-xs-5">
+								<p:commandButton value="Cancelar" styleClass="btn"
+									action="#{personBean.newPerson()}" />
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</p:panel>
+				</div>
+			</h:form>
+		</div>
+		
+		
+		<h:form id="formDataTablePerson">
+			<p:dataTable var="personDTO" value="#{personBean.listPersonDTO}"
+				id="dataTablePerson" paginator="true" rows="5">
+				<f:facet name="header"><h4 class="box-body">Lista de Pessoas</h4></f:facet>
+
+				<p:column headerText="Id" sortBy="#{personDTO.idPerson}"
+					filterBy="#{personDTO.idPerson}" filterMatchMode="exact" width="10%">
+					<h:outputText value="#{personDTO.idPerson}" />
+				</p:column>
+
+				<p:column headerText="Criação" sortBy="#{personDTO.logDTO.creation}">
+					<h:outputText value="#{personDTO.logDTO.creation}">
+						<f:convertDateTime type="localDateTime" pattern="dd/MM/yyyy HH:mm:ss" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Nome" sortBy="#{personDTO.name}"
+				filterBy="#{personDTO.name}" filterMatchMode="contains">
+					<h:outputText value="#{personDTO.name}" />
+				</p:column>
+				
+				<p:column headerText="CPF" sortBy="#{personDTO.cpf}"
+				filterBy="#{personDTO.cpf}" filterMatchMode="contains">
+					<h:outputText value="#{personDTO.cpf}" />
+				</p:column>
+
+				<p:column headerText="Data de Nascimento" sortBy="#{personDTO.dateBirth}">
+					<h:outputText value="#{personDTO.dateBirth}" />
+				</p:column>
+
+				<p:column headerText="Ações" width="8%">
+					<p:commandLink  style="margin-right: 15px; font-size: 2em; text-decoration: none; color: black;" 
+						action="#{personBean.editPerson(personDTO)}" update=":personForm"><div class="glyphicon glyphicon-pencil"></div></p:commandLink>
+					<p:commandLink style="font-size: 2em;text-decoration: none; color: black;" onclick="if (!confirm('Você tem certeza?')) return false;"
+						actionListener="#{personBean.removePerson(personDTO.idPerson)}" update=":formDataTablePerson :personForm">
+					<div class="glyphicon glyphicon-remove"></div></p:commandLink>
+				</p:column>
+
+			</p:dataTable>
+			</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+<!-- </h:body> -->
+<!-- </html> -->

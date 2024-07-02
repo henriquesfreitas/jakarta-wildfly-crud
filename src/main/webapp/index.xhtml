@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+
+        <h:head>
+
+            <title>Sales App</title>
+
+            <style type="text/css">
+
+                .ui-widget, .ui-widget .ui-widget {
+                    font-size: 85% !important;
+                }
+
+                .loading-icon {
+                    font-size: 3rem;
+                    color: var(--primary-color);
+                }
+            </style>
+        </h:head>
+
+        <h:body>
+            <h:form id="form">
+            
+            <h:outputText value="Nome: " />
+					<h:inputText value="#{personBean.personDTO.name}" required="true"
+						requiredMessage="Nome obrigatório" maxlength="255" />
+
+					<h:outputText value="CPF: " />
+					<p:inputMask value="#{personBean.personDTO.cpf}" required="true"
+						requiredMessage="CPF obrigatório" mask="999.999.999-99" />
+
+					<h:outputText value="Data de Nascimento: " />
+					<p:calendar maxlength="10"
+						value="#{personBean.personDTO.dateBirth}" navigator="true"
+						mask="99/99/9999" required="true"
+						requiredMessage="Data de Nascimento obrigatório"
+						pattern="dd/MM/yyyy" />
+
+					<h:outputText value="Telefone: " />
+					<p:inputMask value="#{personBean.personDTO.phone}"
+						mask="(99)9999-9999" />
+
+					<h:outputText value="Email: " />
+					<p:inputText value="#{personBean.personDTO.email}" required="true"
+						requiredMessage="Email obrigatório" maxlength="255" />
+            
+            </h:form>
+            </h:body>
+            </f:view>
+            </html>

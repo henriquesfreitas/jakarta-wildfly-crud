@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="jakarta.faces.facelets"
+      template="/admin.xhtml" >
+      
+      
+    <ui:define name="head">
+        <title>Admin Starter</title>
+    </ui:define>
+
+    <ui:define name="logo-lg">
+        Admin Starter
+    </ui:define>
+
+    <ui:define name="logo-mini">
+        Admin
+    </ui:define>
+    
+    <ui:define name="menu">
+        <ul class="sidebar-menu" data-widget="tree">
+            <li>
+<!--                 <p:link outcome="../index.xhtml" onclick="clearBreadCrumbs()"> -->
+<!--                     <i class="fa fa-home"></i> -->
+<!--                     <span>Home</span> -->
+<!--                 </p:link> -->
+            </li>
+                <li class="header">
+                    General
+                </li>
+                <li>
+<!--                     <p:link outcome="../person.xhtml"> -->
+<!--                         <i class="fa fa-car"></i> -->
+<!--                         <span>Person</span> -->
+<!--                     </p:link> -->
+                </li>
+        </ul>
+        </ui:define>
+      
+
+<!-- <h:head> -->
+<!--     <ui:insert name="head" > -->
+<!--     	<title>Jakarta</title> -->
+<!--     </ui:insert> -->
+<!--     </h:head> -->
+</ui:composition>

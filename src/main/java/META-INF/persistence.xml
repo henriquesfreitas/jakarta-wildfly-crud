@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+ <persistence-unit name="jakarta" transaction-type="JTA">
+
+		<jta-data-source>jakarta</jta-data-source>
+
+		<properties>
+      <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+
+      <!-- for  Glassfish/Payara/EclipseLink -->
+      <property name="eclipselink.logging.level.sql" value="FINE"/>
+      <property name="eclipselink.logging.level" value="FINE"/>
+      <property name="eclipselink.logging.parameters" value="true"/>
+
+      <!-- for WildFly/Hibernate -->
+      <property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+    </properties>
+  </persistence-unit>
+</persistence>
